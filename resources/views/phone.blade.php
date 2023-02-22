@@ -124,6 +124,8 @@
                 </div>    
             </div>
             <div class='ml-20 mt-2'>
+
+              
                 <form action="{{route('student.create')}}" method='post'>
                     @csrf
                     <div class='flex'>

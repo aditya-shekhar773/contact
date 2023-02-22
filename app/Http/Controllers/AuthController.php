@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -32,11 +33,23 @@ class AuthController extends Controller
                     'email' => 'required',
                     'password' => 'required' 
                 ]);
-                // my work
 
+                // dd($data);
+                if(Auth::attempt($data)){
+                    return redirect()->route('student.show')->with('msg',"you're logged in");
+                }
+                else{
+                    return redirect()->route('auth.register')->with('msg','invallide')->with('bg','red');
+                }
+        
         }
 
         // get method
         return view('auth.login');
+    }
+
+    public function loginView(){
+        Auth::logout();
+        return redirect()->route('auth.login');
     }
 }

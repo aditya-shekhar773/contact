@@ -30,7 +30,8 @@ class HomeController extends Controller
         ]);
 
         Contact::create($data);
-        return redirect()->route('student.create');
+        // session()->flash("msg","Data inserted successfully");
+        return redirect()->route('student.show')->with('msg',"Data inserted successfully")->with('bg','teal');
     }
 
     public function search(Request  $r):View{
@@ -50,6 +51,6 @@ class HomeController extends Controller
     public function delete($id):RedirectResponse
     {
         Contact::where('id', '=', $id)->delete();
-        return redirect()->route('student.show');        
+        return redirect()->route('student.show')->with('msg',"Data deleted successfully")->with('bg','red');        
     }
 }
